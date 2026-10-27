@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090811" />
+  <meta name="description" content="MAZNOON؛ بازی گروهی نقش مخفی، سرنخ و فریب. به کی می‌تونی اعتماد کنی؟" />
+  <title>MAZNOON | به کی می‌تونی اعتماد کنی؟</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="MAZNOON home">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span class="brand-name">MAZNOON<small>TRUST NO ONE</small></span>
+    </a>
+    <div class="top-actions"><span class="online-dot"></span><span id="connectionText">اتصال به بازی</span><button class="icon-button" id="rulesButton" title="قوانین بازی" aria-label="قوانین بازی">?</button></div>
+  </header>
+
+  <main class="app-shell">
+    <section id="welcomeScreen" class="welcome-screen">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> SOCIAL DEDUCTION GAME</div>
+        <h1>به کی می‌تونی<br><span>اعتماد کنی؟</span></h1>
+        <p class="hero-description">همه یه سرنخ دارن؛ یکی حتی نمی‌دونه کلمه چیه.<br>حرف بزن، شک کن، رأی بده. نفوذی رو پیدا کن.<br><span class="platform-note">داخل تلگرام یا مرورگر · موبایل، تبلت و کامپیوتر</span></p>
+        <div class="hero-stats"><div><b>۰۳–۰۸</b><span>بازیکن</span></div><i></i><div><b>۱</b><span>نفوذی</span></div><i></i><div><b>۱۰۰٪</b><span>بی‌اعتمادی</span></div></div>
+      </div>
+      <div class="entry-card panel">
+        <div class="card-topline"><span class="small-label">شروع عملیات</span><span class="pill pill-purple">نسخه آزمایشی</span></div>
+        <label for="playerName">اسم مستعارت</label>
+        <input id="playerName" maxlength="18" autocomplete="nickname" placeholder="مثلاً سایه..." />
+        <button id="createButton" class="primary-button"><span>＋</span> ساخت اتاق جدید <b>↙</b></button>
+        <div class="or-divider"><span>یا با کد دعوت وارد شو</span></div>
+        <div class="join-row"><input id="roomCodeInput" maxlength="5" autocomplete="off" placeholder="کد ۵ حرفی" aria-label="کد اتاق" /><button id="joinButton" class="secondary-button">ورود به اتاق</button></div>
+        <div class="privacy-note"><span>◆</span> نقش تو فقط برای خودت نمایش داده می‌شه.</div>
+      </div>
+      <div class="bottom-note"><span class="tiny-star">✦</span> هیچ‌کس اون‌قدر که فکر می‌کنی بی‌گناهه.</div>
+    </section>
+
+    <section id="gameScreen" class="game-screen hidden" aria-live="polite">
+      <div class="game-heading">
+        <div><div class="eyebrow"><span class="eyebrow-line"></span><span id="phaseEyebrow">LOBBY</span></div><h1 id="phaseTitle">اتاق انتظار</h1><p id="phaseDescription">تیمت رو جمع کن؛ بازی نزدیکه.</p></div>
+        <div class="room-badge"><span>کد اتاق</span><button id="copyCodeButton" class="room-code" title="کپی کد اتاق">----- <span>▣</span></button><button id="shareInviteButton" class="secondary-button share-button" type="button">دعوت دوستان ↗</button></div>
+      </div>
+      <div id="lobbyPanel" class="panel lobby-panel hidden">
+        <div class="section-heading"><div><span class="small-label">YOUR CREW</span><h2>بازیکن‌ها <span id="playerCount" class="count-bubble">1/8</span></h2></div><span class="pill">حداقل ۳ نفر</span></div>
+        <div id="playerGrid" class="player-grid"></div>
+        <div class="lobby-footer"><p id="lobbyHint">کد اتاق رو برای دوستات بفرست.</p><button id="startButton" class="primary-button" disabled>شروع بازی <b>↙</b></button></div>
+      </div>
+      <div id="rolePanel" class="role-panel panel hidden"></div>
+      <div id="cluePanel" class="panel content-panel hidden">
+        <div class="section-heading"><div><span class="small-label">ROUND <span id="roundNumber">1</span></span><h2>سرنخت رو ثبت کن</h2></div><span class="pill pill-purple">فاز ۱ از ۲</span></div>
+        <div class="prompt-card"><span class="prompt-icon">✦</span><div><span class="small-label">قانون این دور</span><p>یک سرنخ کوتاه بده؛ خود کلمه رو لو نده و زیادی هم مبهم نباش!</p></div></div>
+        <form id="clueForm"><label for="clueInput">سرنخ تو</label><div class="clue-row"><input id="clueInput" maxlength="100" placeholder="مثلاً: معمولاً توی سفر بهش نیاز دارم..." required /><button id="submitClueButton" class="primary-button" type="submit">ثبت سرنخ</button></div></form>
+        <div id="clueWaiting" class="waiting-box hidden"><span class="spinner"></span><span>سرنخت ثبت شد؛ منتظر بقیه‌ایم...</span></div>
+        <div class="progress-section"><div class="progress-label"><span>سرنخ‌های ثبت‌شده</span><b id="clueProgress">0 / 3</b></div><div class="progress-track"><span id="clueProgressBar"></span></div></div>
+        <div id="cluePlayerList" class="status-list"></div>
+      </div>
+      <div id="votePanel" class="panel content-panel hidden">
+        <div class="section-heading"><div><span class="small-label">ROUND <span id="voteRoundNumber">1</span></span><h2>کی مشکوکه؟</h2></div><span class="pill pill-red">فاز ۲ از ۲</span></div>
+        <p class="muted-copy">سرنخ‌ها رو بخون و به کسی رأی بده که به نظرت نفوذیه. رأی تو محرمانه می‌مونه.</p>
+        <div id="clueGrid" class="clue-grid"></div>
+        <div class="vote-divider"><span>انتخابت رو ثبت کن</span></div>
+        <div id="voteTargets" class="vote-targets"></div>
+        <div id="voteWaiting" class="waiting-box hidden"><span class="spinner"></span><span>رأی تو ثبت شد؛ منتظر بقیه‌ایم...</span></div>
+        <div class="progress-section"><div class="progress-label"><span>رأی‌های ثبت‌شده</span><b id="voteProgress">0 / 3</b></div><div class="progress-track"><span id="voteProgressBar"></span></div></div>
+      </div>
+      <div id="resultPanel" class="panel result-panel hidden"></div>
+      <div class="game-footnote"><span>MAZNOON</span><span>بازی گروهی • نقش مخفی • فریب</span></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <div id="rulesModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+    <div class="modal panel"><button id="closeRulesButton" class="modal-close" aria-label="بستن">×</button><span class="small-label">HOW TO PLAY</span><h2 id="rulesTitle">قوانین مظنون</h2><ol><li>همه به‌جز یک نفر، کلمه مخفی یکسانی می‌بینن.</li><li>نفوذی کلمه رو نمی‌دونه و باید باهوشانه سرنخ بده.</li><li>همه سرنخ می‌نویسن؛ بعد بازیکن‌ها به فرد مشکوک رأی می‌دن.</li><li>اگر نفوذی حذف بشه، شهروندها می‌برن. اگر شهروندها اشتباه کنن، بازی ادامه پیدا می‌کنه.</li></ol><p class="modal-tip">نکته: سرنخ واضح می‌تونه کلمه رو لو بده؛ سرنخ عجیب هم ممکنه خودت رو لو بده!</p></div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
